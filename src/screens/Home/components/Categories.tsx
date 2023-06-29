@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Constants } from "../constants/constants";
+import { Constants } from "../../../constants/Constants";
 
 type props = {
   onCategorySelection: (cat: any) => void;

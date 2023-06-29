@@ -1,21 +1,20 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import Poster from "../../../components/Poster";
+import Poster from "./Poster";
 
 type ListingProps = {
   title: string;
   movies: [];
+  // onTap:()=>();
 };
 const BottomDisplay = ({ title, movies }: ListingProps) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       <FlatList
         data={movies}
         horizontal
-        renderItem={({ item }) => {
-          return <Poster movie={item} />;
-        }}
+        renderItem={({ item }) => <Poster movie={item} />}
         keyExtractor={(item) => item.id}
       />
     </View>
@@ -25,10 +24,13 @@ const BottomDisplay = ({ title, movies }: ListingProps) => {
 export default BottomDisplay;
 
 const styles = StyleSheet.create({
+  container: {
+    paddingBottom: 40,
+  },
   title: {
     color: "#fff",
     fontSize: 24,
     fontWeight: "600",
-    marginVertical: 25,
+    marginVertical: 15,
   },
 });

@@ -1,4 +1,4 @@
-import { API_ENDPOINTS, apiCall } from "../config/movieApi";
+import { API_ENDPOINTS, API_FIELD, apiCall, baseUrl } from "../config/movieApi";
 
 const urlForCategoryId = (id) => {
     switch(id){
@@ -15,5 +15,10 @@ const urlForCategoryId = (id) => {
 
 export const fetchMoviesWithCategoryId = (id) => {
     const url = urlForCategoryId(id);
+    return apiCall(url);
+}
+
+export const fetchMovieDetail =(id) => {
+    const url = `${baseUrl}${id}${API_FIELD}`
     return apiCall(url);
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -8,9 +9,10 @@ import {
   View,
 } from "react-native";
 import { fetchMoviesWithCategoryId } from "../../network/network";
-import Categories from "../../components/Categories";
+import Categories from "./components/Categories";
 import BottomDisplay from "./components/BottomDisplay";
 import { Strings } from "../../constants/Strings";
+import { Movie } from "../../model/Movie";
 
 const Home = () => {
   const [movies, setMovies] = useState<any>([]);
@@ -36,7 +38,7 @@ const Home = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ padding: 20 }}>
+      <ScrollView style={styles.pagePadding}>
         <Text style={styles.greeting}>
           {Strings.home.greeting}
           <Text> Ruchi!</Text>
@@ -53,7 +55,7 @@ const Home = () => {
         </View>
         <Categories onCategorySelection={changeCategory} />
         <BottomDisplay title={selectedCat} movies={movies} />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -63,7 +65,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#1A2B35",
     flex: 1,
   },
-
+  pagePadding: {
+    padding: 20,
+  },
   greeting: {
     fontWeight: "bold",
     color: "white",
@@ -84,7 +88,7 @@ const styles = StyleSheet.create({
   searchBox: {
     backgroundColor: "gray",
     marginTop: 30,
-    height: 60,
+    height: 50,
     borderRadius: 15,
     textAlign: "center",
     fontSize: 20,
