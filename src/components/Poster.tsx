@@ -1,10 +1,10 @@
 import React from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { imgBaseUrl } from "../config/movieApi";
+import { ImageSizes } from "../constants/constants";
 
 const Poster = (movie) => {
-  const size = "w300/";
-  //   console.warn(imgBaseUrl + size + movie.movie.poster_path);
+  const size = ImageSizes.w342;
   return (
     <TouchableOpacity>
       <Image
@@ -17,8 +17,8 @@ const Poster = (movie) => {
 
 const styles = StyleSheet.create({
   poster: {
-    width: 220,
-    height: 300,
+    width: 250,
+    height: 350,
     margin: 10,
     borderRadius: 10,
     borderColor: "gray",

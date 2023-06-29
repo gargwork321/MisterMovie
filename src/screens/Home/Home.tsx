@@ -10,24 +10,30 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { fetchNowPlayingMovies } from "../../network/network";
+import { fetchMoviesWithCategoryId } from "../../network/network";
 import Poster from "../../components/Poster";
-import Category from "../../components/Category";
+import Categories from "../../components/Categories";
 
 const Home = () => {
   const [movies, setMovies] = useState<any>([]);
+  const [selectedCat, setSelectedCat] = useState("Now Playing");
 
   //Hooks
   useEffect(() => {
     // API call for now playing movies
-    getNowPlayingMovies();
+    fetchMovies();
   }, []);
 
-  const getNowPlayingMovies = async () => {
-    const _ = await fetchNowPlayingMovies().then((data) => {
-      // console.log(data.results[0]);
+  const fetchMovies = async (catID = 1) => {
+    setMovies([]);
+    const _ = await fetchMoviesWithCategoryId(catID).then((data) => {
       setMovies(data.results);
     });
+  };
+
+  const changeCategory = (cat) => {
+    setSelectedCat(cat.title);
+    fetchMovies(cat.id);
   };
 
   return (
@@ -57,35 +63,25 @@ const Home = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginBottom: 20,
-          }}
-        >
-          <Category />
-          <Category />
-          <Category />
-          <Category />
-        </View>
+        <Categories onCategorySelection={changeCategory} />
 
         <Text
           style={{
             color: "#fff",
             fontSize: 24,
             fontWeight: "600",
-            marginVertical: 20,
+            marginVertical: 25,
           }}
         >
-          Categories
+          {selectedCat}
         </Text>
         <FlatList
           data={movies}
           horizontal
-          renderItem={(movie) => {
-            return <Poster movie={movie.item} />;
+          renderItem={({ item }) => {
+            return <Poster movie={item} />;
           }}
+          keyExtractor={(item) => item.id}
         />
       </View>
     </SafeAreaView>

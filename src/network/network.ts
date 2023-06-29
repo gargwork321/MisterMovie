@@ -1,21 +1,19 @@
 import { API_ENDPOINTS, apiCall } from "../config/movieApi";
 
-export const fetchPopularMovies = ( ) => {
-    const url = `${API_ENDPOINTS.popular}`;
-    return apiCall(url);
+const urlForCategoryId = (id) => {
+    switch(id){
+        case 1:
+            return `${API_ENDPOINTS.nowPlaying}`;
+        case 2:
+            return `${API_ENDPOINTS.upcoming}`;
+        case 3:
+            return `${API_ENDPOINTS.toprated}`;
+        case 4:
+            return `${API_ENDPOINTS.popular}`;
+    }
 }
 
-export const fetchTopRatedMovies = ( ) => {
-    const url = `${API_ENDPOINTS.toprated}`;
-    return apiCall(url);
-}
-
-export const fetchUpcomingMovies = ( ) => {
-    const url = `${API_ENDPOINTS.upcoming}`;
-    return apiCall(url);
-}
-
-export const fetchNowPlayingMovies = ( ) => {
-    const url = `${API_ENDPOINTS.nowPlaying}`;
+export const fetchMoviesWithCategoryId = (id) => {
+    const url = urlForCategoryId(id);
     return apiCall(url);
 }
