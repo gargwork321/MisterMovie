@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
+  Button,
+  Image,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -16,11 +18,14 @@ import Categories from "./components/Categories";
 import BottomDisplay from "./components/BottomDisplay";
 import { Strings } from "../../constants/Strings";
 import { debounce } from "lodash";
+import { useNavigation } from "@react-navigation/native";
+import Screens from "../../constants/Screens";
+import LocalImages from "../../constants/LocalImages";
 
 const Home = () => {
   const [movies, setMovies] = useState<any>([]);
   const [selectedCat, setSelectedCat] = useState("Now Playing");
-  const [searchString, setSearchString] = useState("");
+  const navigation = useNavigation();
 
   const fetchMovies = async (catID = 1) => {
     setMovies([]);
@@ -28,10 +33,12 @@ const Home = () => {
       setMovies(data.results);
     });
   };
-  const searchMovieWithText = async () => {
-    setMovies([]);
-    const _ = await searchMovieWith(searchString).then((data) => {
-      setMovies(data.results);
+  const searchMovieWithText = async (text) => {
+    const _ = await searchMovieWith(text).then((data) => {
+      // setMovies(data.results);
+      navigation.navigate(Screens.LISTING, {
+        results: data.results,
+      });
     });
   };
   const changeCategory = (cat) => {
@@ -39,7 +46,9 @@ const Home = () => {
     fetchMovies(cat.id);
   };
   const updatedText = (value) => {
-    setSearchString(value);
+    if (value !== "") {
+      searchMovieWithText(value);
+    }
   };
   const handleTextDebounce = useCallback(debounce(updatedText, 1200), []);
 
@@ -48,10 +57,6 @@ const Home = () => {
     // API call for now playing movies
     fetchMovies();
   }, []);
-
-  useEffect(() => {
-    searchString === "" ? fetchMovies() : searchMovieWithText();
-  }, [searchString]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -66,7 +71,14 @@ const Home = () => {
             placeholder="Search"
             style={styles.searchInput}
             onChangeText={handleTextDebounce}
+            autoCorrect={false}
           />
+          {/* <TouchableOpacity>
+            <Image
+              style={{ width: 30, height: 30 }}
+              source={LocalImages.clear}
+            />
+          </TouchableOpacity> */}
         </View>
         <View style={styles.categoryContainer}>
           <Text style={styles.catTitle}>{Strings.home.categories}</Text>
@@ -95,25 +107,24 @@ const styles = StyleSheet.create({
     fontSize: 25,
     paddingBottom: 5,
   },
-
   subtitle: {
     color: "gray",
     fontSize: 16,
   },
-
   searchInput: {
-    flex: 1,
     fontSize: 20,
     color: "white",
+    flex: 1,
   },
   searchBox: {
     backgroundColor: "gray",
-    marginTop: 30,
+    marginTop: 25,
     height: 50,
     borderRadius: 15,
-    textAlign: "center",
     fontSize: 20,
-    padding: 15,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 10,
   },
   categoryContainer: {
     flexDirection: "row",
@@ -134,4 +145,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
 export default Home;

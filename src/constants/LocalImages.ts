@@ -7,4 +7,6 @@ export default{
     film_reel:require('../../assets/images/film-reel.png'),
     placeHolder:require('../../assets/images/placeholder.jpeg'),
     placeHolder2:require('../../assets/images/placeholder2.jpeg'),
+    clear:require('../../assets/images/clear.png'),
+    back:require('../../assets/images/previous.png'),
 };

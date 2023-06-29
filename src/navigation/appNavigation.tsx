@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import Home from "../screens/Home";
 import Screens from "../constants/Screens";
 import MovieDetail from "../screens/MovieDetail";
+import Listing from "../screens/Listing";
 
 const Stack = createNativeStackNavigator();
 export default function AppNavigation() {
@@ -18,6 +19,11 @@ export default function AppNavigation() {
         <Stack.Screen
           name={Screens.MOVIE_DETAIL}
           component={MovieDetail}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={Screens.LISTING}
+          component={Listing}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

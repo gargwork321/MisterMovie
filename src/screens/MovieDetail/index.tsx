@@ -51,7 +51,7 @@ const MovieDetail = ({ route }) => {
         <Image style={styles.bgPoster} source={imgSource} blurRadius={10} />
         <Image style={styles.fgPoster} source={imgSource} />
         <TouchableOpacity style={styles.backButton} onPress={backToHome}>
-          <Image style={styles.backImg} source={LocalImages.back_arrow} />
+          <Image style={styles.backImg} source={LocalImages.back} />
         </TouchableOpacity>
       </View>
       <ScrollView style={styles.bottomContainer}>

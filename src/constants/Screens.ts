@@ -1,6 +1,7 @@
 const Screens = {
     HOME:'Home',
     MOVIE_DETAIL:'MovieDetail',
-    SEARCHING:'Searching'
+    SEARCHING:'Searching',
+    LISTING:'Listing',
 }
 export default Screens;
