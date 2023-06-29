@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Home from './src/screens/Home/Home';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Opstart working ofdfdfn your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    // <View style={styles.container}>
+      <Home/>
+    // </View>
   );
 }
 
@@ -17,4 +17,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  box: {
+    backgroundColor:'red',
+    width:300,
+    height:400,
+  }
 });
