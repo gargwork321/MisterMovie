@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Button,
-  FlatList,
-  Image,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -11,8 +8,9 @@ import {
   View,
 } from "react-native";
 import { fetchMoviesWithCategoryId } from "../../network/network";
-import Poster from "../../components/Poster";
 import Categories from "../../components/Categories";
+import BottomDisplay from "./components/BottomDisplay";
+import { Strings } from "../../constants/Strings";
 
 const Home = () => {
   const [movies, setMovies] = useState<any>([]);
@@ -40,49 +38,21 @@ const Home = () => {
     <SafeAreaView style={styles.container}>
       <View style={{ padding: 20 }}>
         <Text style={styles.greeting}>
-          Hello<Text style={{ fontWeight: "normal" }}> Ruchi!</Text>{" "}
+          {Strings.home.greeting}
+          <Text> Ruchi!</Text>
         </Text>
-        <Text style={styles.username}>Watch your favourite movie</Text>
+        <Text style={styles.subtitle}>{Strings.home.subtitle}</Text>
         <View style={styles.searchBox}>
           <TextInput placeholder="Search" style={styles.searchInput} />
         </View>
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Text
-            style={{
-              color: "#fff",
-              fontSize: 24,
-              fontWeight: "600",
-              marginVertical: 20,
-            }}
-          >
-            Categories
-          </Text>
-          <TouchableOpacity style={{ justifyContent: "center" }}>
-            <Text style={{ color: "orange", alignSelf: "center" }}>
-              See all &gt;
-            </Text>
+        <View style={styles.categoryContainer}>
+          <Text style={styles.catTitle}>{Strings.home.categories}</Text>
+          <TouchableOpacity style={styles.centerJustfication}>
+            <Text style={styles.seeAllBtn}>{Strings.home.seeAll}</Text>
           </TouchableOpacity>
         </View>
         <Categories onCategorySelection={changeCategory} />
-
-        <Text
-          style={{
-            color: "#fff",
-            fontSize: 24,
-            fontWeight: "600",
-            marginVertical: 25,
-          }}
-        >
-          {selectedCat}
-        </Text>
-        <FlatList
-          data={movies}
-          horizontal
-          renderItem={({ item }) => {
-            return <Poster movie={item} />;
-          }}
-          keyExtractor={(item) => item.id}
-        />
+        <BottomDisplay title={selectedCat} movies={movies} />
       </View>
     </SafeAreaView>
   );
@@ -90,7 +60,7 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "black",
+    backgroundColor: "#1A2B35",
     flex: 1,
   },
 
@@ -101,9 +71,9 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
 
-  username: {
+  subtitle: {
     color: "gray",
-    fontSize: 15,
+    fontSize: 16,
   },
 
   searchInput: {
@@ -119,6 +89,24 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     padding: 15,
+  },
+  categoryContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  catTitle: {
+    color: "#fff",
+    fontSize: 24,
+    fontWeight: "600",
+    marginVertical: 20,
+  },
+  seeAllBtn: {
+    color: "orange",
+    alignSelf: "center",
+    fontSize: 16,
+  },
+  centerJustfication: {
+    justifyContent: "center",
   },
 });
 export default Home;

@@ -12,30 +12,11 @@ const Categories = ({ onCategorySelection }: props) => {
   const formCategory = (cat): JSX.Element => {
     return (
       <TouchableOpacity
-        style={{
-          width: 80,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+        style={styles.box}
         onPress={() => onCategorySelection(cat)}
       >
-        <View
-          style={{
-            backgroundColor: "gray",
-            width: 60,
-            height: 60,
-            justifyContent: "center",
-            borderRadius: 5,
-          }}
-        >
-          <Image
-            style={{
-              width: 50,
-              height: 50,
-              alignSelf: "center",
-            }}
-            source={cat.img}
-          />
+        <View style={styles.iconView}>
+          <Image style={styles.img} source={cat.img} />
         </View>
         <Text style={{ color: "#fff", marginTop: 5 }}>{cat.title}</Text>
       </TouchableOpacity>
@@ -43,18 +24,35 @@ const Categories = ({ onCategorySelection }: props) => {
   };
 
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-between",
-        marginBottom: 20,
-      }}
-    >
+    <View style={styles.container}>
       {categories.map((cat) => formCategory(cat))}
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20,
+  },
+  box: {
+    width: 80,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  iconView: {
+    backgroundColor: "gray",
+    width: 60,
+    height: 60,
+    justifyContent: "center",
+    borderRadius: 5,
+  },
+  img: {
+    width: 50,
+    height: 50,
+    alignSelf: "center",
+  },
+});
 
 export default Categories;
