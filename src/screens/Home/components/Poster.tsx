@@ -4,6 +4,7 @@ import { imgBaseUrl } from "../../../config/movieApi";
 import { ImageSizes } from "../../../constants/Constants";
 import { useNavigation } from "@react-navigation/native";
 import Screens from "../../../constants/Screens";
+import LocalImages from "../../../constants/LocalImages";
 
 type PosterProps = {
   movie: any;
@@ -17,12 +18,12 @@ const Poster = ({ movie }: PosterProps) => {
   const showMovieDetails = () => {
     navigation.navigate(Screens.MOVIE_DETAIL, { movieID: movie.id });
   };
+  const imgSource = movie.poster_path
+    ? { uri: imgBaseUrl + size + movie.poster_path }
+    : LocalImages.placeHolder;
   return (
     <TouchableOpacity onPress={showMovieDetails}>
-      <Image
-        style={styles.poster}
-        source={{ uri: imgBaseUrl + size + movie.poster_path }}
-      />
+      <Image style={styles.poster} source={imgSource} />
     </TouchableOpacity>
   );
 };

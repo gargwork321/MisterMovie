@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -8,21 +8,19 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { fetchMoviesWithCategoryId } from "../../network/network";
+import {
+  fetchMoviesWithCategoryId,
+  searchMovieWith,
+} from "../../network/network";
 import Categories from "./components/Categories";
 import BottomDisplay from "./components/BottomDisplay";
 import { Strings } from "../../constants/Strings";
-import { Movie } from "../../model/Movie";
+import { debounce } from "lodash";
 
 const Home = () => {
   const [movies, setMovies] = useState<any>([]);
   const [selectedCat, setSelectedCat] = useState("Now Playing");
-
-  //Hooks
-  useEffect(() => {
-    // API call for now playing movies
-    fetchMovies();
-  }, []);
+  const [searchString, setSearchString] = useState("");
 
   const fetchMovies = async (catID = 1) => {
     setMovies([]);
@@ -30,22 +28,45 @@ const Home = () => {
       setMovies(data.results);
     });
   };
-
+  const searchMovieWithText = async () => {
+    setMovies([]);
+    const _ = await searchMovieWith(searchString).then((data) => {
+      setMovies(data.results);
+    });
+  };
   const changeCategory = (cat) => {
     setSelectedCat(cat.title);
     fetchMovies(cat.id);
   };
+  const updatedText = (value) => {
+    setSearchString(value);
+  };
+  const handleTextDebounce = useCallback(debounce(updatedText, 1200), []);
+
+  //Hooks
+  useEffect(() => {
+    // API call for now playing movies
+    fetchMovies();
+  }, []);
+
+  useEffect(() => {
+    searchString === "" ? fetchMovies() : searchMovieWithText();
+  }, [searchString]);
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.pagePadding}>
         <Text style={styles.greeting}>
           {Strings.home.greeting}
-          <Text> Ruchi!</Text>
+          <Text> Vivek!</Text>
         </Text>
         <Text style={styles.subtitle}>{Strings.home.subtitle}</Text>
         <View style={styles.searchBox}>
-          <TextInput placeholder="Search" style={styles.searchInput} />
+          <TextInput
+            placeholder="Search"
+            style={styles.searchInput}
+            onChangeText={handleTextDebounce}
+          />
         </View>
         <View style={styles.categoryContainer}>
           <Text style={styles.catTitle}>{Strings.home.categories}</Text>

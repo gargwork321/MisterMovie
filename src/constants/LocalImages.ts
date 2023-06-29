@@ -5,4 +5,6 @@ export default{
     top_rated: require('../../assets/images/videoCamera.png'),
     back_arrow:require('../../assets/images/backArrow.png'),
     film_reel:require('../../assets/images/film-reel.png'),
+    placeHolder:require('../../assets/images/placeholder.jpeg'),
+    placeHolder2:require('../../assets/images/placeholder2.jpeg'),
 };

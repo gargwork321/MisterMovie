@@ -19,6 +19,11 @@ export const fetchMoviesWithCategoryId = (id) => {
 }
 
 export const fetchMovieDetail =(id) => {
-    const url = `${baseUrl}${id}${API_FIELD}`
+    const url = `${baseUrl}movie/${id}?${API_FIELD}`
+    return apiCall(url);
+}
+
+export const searchMovieWith = (text) => {
+    const url = `${baseUrl}search/movie?query=${text}&${API_FIELD}`
     return apiCall(url);
 }

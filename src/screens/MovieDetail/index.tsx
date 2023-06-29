@@ -41,19 +41,15 @@ const MovieDetail = ({ route }) => {
       setMovieDetails(data);
     });
   };
+  const imgSource = movieDetails?.poster_path
+    ? { uri: imgBaseUrl + w342 + movieDetails.poster_path }
+    : LocalImages.placeHolder2;
 
   return movieDetails ? (
     <View style={styles.container}>
       <View>
-        <Image
-          style={styles.bgPoster}
-          source={{ uri: imgBaseUrl + w342 + movieDetails?.poster_path }}
-          blurRadius={10}
-        />
-        <Image
-          style={styles.fgPoster}
-          source={{ uri: imgBaseUrl + w342 + movieDetails?.poster_path }}
-        />
+        <Image style={styles.bgPoster} source={imgSource} blurRadius={10} />
+        <Image style={styles.fgPoster} source={imgSource} />
         <TouchableOpacity style={styles.backButton} onPress={backToHome}>
           <Image style={styles.backImg} source={LocalImages.back_arrow} />
         </TouchableOpacity>
