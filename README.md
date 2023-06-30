@@ -8,8 +8,10 @@ A hybrid application to showcase and search movies
 # Demo!
 
 ### Showcase Movie categories
+![home_AdobeExpress](https://github.com/gargwork321/MisterMovie/assets/52659086/def982c9-9f42-4536-afa7-e1a5736edbec)
 
 ### Show Movie detail
+![movieDetail_AdobeExpress](https://github.com/gargwork321/MisterMovie/assets/52659086/533f493c-3f43-43b0-8c7b-8708361348f6)
 
 ### Search Movies
 
