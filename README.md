@@ -14,6 +14,7 @@ A hybrid application to showcase and search movies
 ![movieDetail_AdobeExpress](https://github.com/gargwork321/MisterMovie/assets/52659086/533f493c-3f43-43b0-8c7b-8708361348f6)
 
 ### Search Movies
+![Screen_Recording_2023-06-30_at_6_09_55_PM_AdobeExpress](https://github.com/gargwork321/MisterMovie/assets/52659086/152631ad-e677-430d-953e-1e1a8c04dae3)
 
 
 # Installaion Requirement
