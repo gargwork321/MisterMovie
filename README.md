@@ -41,9 +41,10 @@ brew install node
 
 npm install -g expo-cli
 
-
 ### Install node_modules
 npm install
+
+# Run on Device 
 
 ### Build for iOS
 npx expo run:ios
