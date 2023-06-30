@@ -48,7 +48,7 @@ const Listing = ({ navigation, route }) => {
         onPress={() => showMovieDetails(movie.id)}
       >
         <EasyImage style={styles.thumbnail} webImage={imgPath} />
-        <Text style={styles.title}>{movie.title}</Text>
+        <Text style={styles.movieTitle}>{movie.title}</Text>
       </TouchableOpacity>
     );
   };
@@ -118,11 +118,11 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     borderRadius: 10,
   },
-  title: {
+  movieTitle: {
     color: "#fff",
     fontSize: 12,
     marginTop: 5,
-    fontWeight: 500,
+    fontWeight: "500",
     flex: 1,
   },
   searchInput: {
