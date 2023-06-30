@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { imgBaseUrl } from "../../../config/movieApi";
 import { ImageSizes } from "../../../constants/Constants";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { NavigationProp } from "@react-navigation/native";
 import Screens from "../../../constants/Screens";
 import EasyImage from "../../../components/EasyImage";
 

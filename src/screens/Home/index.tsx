@@ -30,7 +30,7 @@ const Home = ({ navigation }) => {
   };
   const searchMovieWithText = async (text) => {
     const _ = await searchMovieWith(text).then((data) => {
-      navigation.navigate(Screens.LISTING, {
+      navigation.push(Screens.LISTING, {
         results: data.results,
       });
     });

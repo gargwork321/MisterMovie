@@ -16,8 +16,6 @@ export default function AppNavigation() {
           component={Home}
           options={{
             headerShown: false,
-            presentation: "transparentModal",
-            animation: "slide_from_right",
           }}
         />
         <Stack.Screen
@@ -25,8 +23,6 @@ export default function AppNavigation() {
           component={MovieDetail}
           options={{
             headerShown: false,
-            presentation: "transparentModal",
-            animation: "slide_from_right",
           }}
         />
         <Stack.Screen
@@ -34,8 +30,6 @@ export default function AppNavigation() {
           component={Listing}
           options={{
             headerShown: false,
-            presentation: "transparentModal",
-            animation: "fade",
           }}
         />
       </Stack.Navigator>

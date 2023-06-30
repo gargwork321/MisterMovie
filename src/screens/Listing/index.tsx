@@ -26,7 +26,7 @@ const Listing = ({ navigation, route }) => {
     navigation.goBack();
   };
   const showMovieDetails = (id) => {
-    navigation.navigate(Screens.MOVIE_DETAIL, { movieID: id });
+    navigation.push(Screens.MOVIE_DETAIL, { movieID: id });
   };
   const updatedText = (value) => {
     setSearchString(value);

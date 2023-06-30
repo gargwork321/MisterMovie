@@ -15,12 +15,15 @@ const EasyImage: React.FC<ImageProps> = ({
   localImage,
   blurRadius = 0,
 }) => {
-  const [loading, setLoading] = useState<boolean>(localImage ? false : true);
+  const [loading, setLoading] = useState<boolean>(true);
   return (
     <Image
       style={style || styles.default}
       source={
-        loading ? LocalImages.placeHolder : localImage || { uri: webImage }
+        loading
+          ? LocalImages.placeHolder
+          : localImage ||
+            (webImage ? { uri: webImage } : LocalImages.placeHolder2)
       }
       onLoadEnd={() => setLoading(false)}
       blurRadius={blurRadius}
