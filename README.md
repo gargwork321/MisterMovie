@@ -33,7 +33,7 @@ A hybrid application to showcase and search movies
 - Open the Terminal app.
 - Type ruby -e "\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" You’ll see messages in the Terminal explaining what you need to do to complete the installation process. You can learn more about Homebrew at the Homebrew website.
 
-### Npm
+### Install node
 
 brew install node
 
@@ -42,11 +42,11 @@ brew install node
 npm install -g expo-cli
 
 
-# Install node_modules
+### Install node_modules
 npm install
 
-# Build for iOS
+### Build for iOS
 npx expo run:ios
 
-# Build for Android
+### Build for Android
 npx expo run:android
