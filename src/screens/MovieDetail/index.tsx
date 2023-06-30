@@ -14,17 +14,15 @@ import { Dimensions } from "react-native";
 import LocalImages from "../../constants/LocalImages";
 import { Strings } from "../../constants/Strings";
 import { convertMinutesToHoursAndMinutes } from "../../helpers/helper";
-import { useNavigation } from "@react-navigation/native";
 import EasyImage from "../../components/EasyImage";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const MovieDetail = ({ route }) => {
+const MovieDetail = ({ navigation, route }) => {
   const movieId = route.params.movieID;
   const [movieDetails, setMovieDetails] = useState(null);
   const { w342 } = ImageSizes;
-  const navigation = useNavigation();
   const imgSource = movieDetails?.poster_path
     ? imgBaseUrl + w342 + movieDetails.poster_path
     : null;
@@ -39,6 +37,7 @@ const MovieDetail = ({ route }) => {
       setMovieDetails(data);
     });
   };
+
   //Hooks
   useEffect(() => {
     // API call for now playing movies

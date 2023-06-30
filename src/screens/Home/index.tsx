@@ -16,13 +16,11 @@ import Categories from "./components/Categories";
 import BottomDisplay from "./components/BottomDisplay";
 import { Strings } from "../../constants/Strings";
 import { debounce } from "lodash";
-import { useNavigation } from "@react-navigation/native";
 import Screens from "../../constants/Screens";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const [movies, setMovies] = useState<any>([]);
   const [selectedCat, setSelectedCat] = useState("Now Playing");
-  const navigation = useNavigation();
 
   const fetchMovies = async (catID = 1) => {
     setMovies([]);
@@ -83,7 +81,11 @@ const Home = () => {
           </TouchableOpacity>
         </View>
         <Categories onCategorySelection={changeCategory} />
-        <BottomDisplay title={selectedCat} movies={movies} />
+        <BottomDisplay
+          title={selectedCat}
+          movies={movies}
+          navigation={navigation}
+        />
       </ScrollView>
     </SafeAreaView>
   );

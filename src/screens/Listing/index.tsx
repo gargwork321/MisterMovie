@@ -11,17 +11,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { imgBaseUrl } from "../../config/movieApi";
 import LocalImages from "../../constants/LocalImages";
 import { ImageSizes } from "../../constants/Constants";
-import { useNavigation } from "@react-navigation/native";
 import Screens from "../../constants/Screens";
 import { debounce } from "lodash";
 import { searchMovieWith } from "../../network/network";
 import EasyImage from "../../components/EasyImage";
 
-const Listing = ({ route }) => {
+const Listing = ({ navigation, route }) => {
   const [movies, setMovies] = useState(route.params.results);
   const [searchString, setSearchString] = useState("");
   const size = ImageSizes.w185;
-  const navigation = useNavigation();
 
   //Functions
   const backToHome = () => {

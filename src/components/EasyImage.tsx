@@ -15,7 +15,7 @@ const EasyImage: React.FC<ImageProps> = ({
   localImage,
   blurRadius = 0,
 }) => {
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(localImage ? false : true);
   return (
     <Image
       style={style || styles.default}

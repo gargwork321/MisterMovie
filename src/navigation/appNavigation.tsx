@@ -17,7 +17,7 @@ export default function AppNavigation() {
           options={{
             headerShown: false,
             presentation: "transparentModal",
-            animation: "fade",
+            animation: "slide_from_right",
           }}
         />
         <Stack.Screen
@@ -26,7 +26,7 @@ export default function AppNavigation() {
           options={{
             headerShown: false,
             presentation: "transparentModal",
-            animation: "fade",
+            animation: "slide_from_right",
           }}
         />
         <Stack.Screen
