@@ -15,6 +15,7 @@ import LocalImages from "../../constants/LocalImages";
 import { Strings } from "../../constants/Strings";
 import { convertMinutesToHoursAndMinutes } from "../../helpers/helper";
 import { useNavigation } from "@react-navigation/native";
+import EasyImage from "../../components/EasyImage";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -24,12 +25,9 @@ const MovieDetail = ({ route }) => {
   const [movieDetails, setMovieDetails] = useState(null);
   const { w342 } = ImageSizes;
   const navigation = useNavigation();
-
-  //Hooks
-  useEffect(() => {
-    // API call for now playing movies
-    fetchMovieDetails(movieId);
-  }, []);
+  const imgSource = movieDetails?.poster_path
+    ? imgBaseUrl + w342 + movieDetails.poster_path
+    : null;
 
   //Functions
   const backToHome = () => {
@@ -41,17 +39,23 @@ const MovieDetail = ({ route }) => {
       setMovieDetails(data);
     });
   };
-  const imgSource = movieDetails?.poster_path
-    ? { uri: imgBaseUrl + w342 + movieDetails.poster_path }
-    : LocalImages.placeHolder2;
+  //Hooks
+  useEffect(() => {
+    // API call for now playing movies
+    fetchMovieDetails(movieId);
+  }, []);
 
   return movieDetails ? (
     <View style={styles.container}>
       <View>
-        <Image style={styles.bgPoster} source={imgSource} blurRadius={10} />
-        <Image style={styles.fgPoster} source={imgSource} />
+        <EasyImage
+          style={styles.bgPoster}
+          webImage={imgSource}
+          blurRadius={10}
+        />
+        <EasyImage style={styles.fgPoster} webImage={imgSource} />
         <TouchableOpacity style={styles.backButton} onPress={backToHome}>
-          <Image style={styles.backImg} source={LocalImages.back} />
+          <EasyImage style={styles.backImg} localImage={LocalImages.back} />
         </TouchableOpacity>
       </View>
       <ScrollView style={styles.bottomContainer}>
@@ -80,7 +84,10 @@ const MovieDetail = ({ route }) => {
             <Text style={styles.whiteFont}>{item.english_name}, </Text>
           ))}
         </Text>
-        <Image source={LocalImages.film_reel} style={styles.watermark} />
+        <EasyImage
+          style={styles.watermark}
+          localImage={LocalImages.film_reel}
+        />
       </ScrollView>
     </View>
   ) : (

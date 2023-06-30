@@ -5,7 +5,6 @@ import Poster from "./Poster";
 type ListingProps = {
   title: string;
   movies: [];
-  // onTap:()=>();
 };
 const BottomDisplay = ({ title, movies }: ListingProps) => {
   return (
@@ -21,8 +20,6 @@ const BottomDisplay = ({ title, movies }: ListingProps) => {
   );
 };
 
-export default BottomDisplay;
-
 const styles = StyleSheet.create({
   container: {
     paddingBottom: 40,
@@ -34,3 +31,5 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
 });
+
+export default BottomDisplay;

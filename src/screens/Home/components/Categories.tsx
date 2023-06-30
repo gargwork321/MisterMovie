@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Constants } from "../../../constants/Constants";
+import EasyImage from "../../../components/EasyImage";
 
 type props = {
   onCategorySelection: (cat: any) => void;
@@ -16,9 +17,9 @@ const Categories = ({ onCategorySelection }: props) => {
         onPress={() => onCategorySelection(cat)}
       >
         <View style={styles.iconView}>
-          <Image style={styles.img} source={cat.img} />
+          <EasyImage style={styles.img} localImage={cat.img} />
         </View>
-        <Text style={{ color: "#fff", marginTop: 5 }}>{cat.title}</Text>
+        <Text style={styles.title}>{cat.title}</Text>
       </TouchableOpacity>
     );
   };
@@ -40,6 +41,10 @@ const styles = StyleSheet.create({
     width: 80,
     justifyContent: "center",
     alignItems: "center",
+  },
+  title: {
+    color: "#fff",
+    marginTop: 5,
   },
   iconView: {
     backgroundColor: "gray",

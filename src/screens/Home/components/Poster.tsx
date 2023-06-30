@@ -1,10 +1,10 @@
 import React from "react";
-import { Image, StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { imgBaseUrl } from "../../../config/movieApi";
 import { ImageSizes } from "../../../constants/Constants";
 import { useNavigation } from "@react-navigation/native";
 import Screens from "../../../constants/Screens";
-import LocalImages from "../../../constants/LocalImages";
+import EasyImage from "../../../components/EasyImage";
 
 type PosterProps = {
   movie: any;
@@ -13,17 +13,17 @@ type PosterProps = {
 const Poster = ({ movie }: PosterProps) => {
   const size = ImageSizes.w342;
   const navigation = useNavigation();
+  const imgSource = movie.poster_path
+    ? imgBaseUrl + size + movie.poster_path
+    : null;
 
   //Functions
   const showMovieDetails = () => {
     navigation.navigate(Screens.MOVIE_DETAIL, { movieID: movie.id });
   };
-  const imgSource = movie.poster_path
-    ? { uri: imgBaseUrl + size + movie.poster_path }
-    : LocalImages.placeHolder;
   return (
     <TouchableOpacity onPress={showMovieDetails}>
-      <Image style={styles.poster} source={imgSource} />
+      <EasyImage style={styles.poster} webImage={imgSource} />
     </TouchableOpacity>
   );
 };

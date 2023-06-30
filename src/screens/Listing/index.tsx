@@ -1,7 +1,5 @@
 import {
   FlatList,
-  Image,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -17,11 +15,11 @@ import { useNavigation } from "@react-navigation/native";
 import Screens from "../../constants/Screens";
 import { debounce } from "lodash";
 import { searchMovieWith } from "../../network/network";
+import EasyImage from "../../components/EasyImage";
 
 const Listing = ({ route }) => {
   const [movies, setMovies] = useState(route.params.results);
   const [searchString, setSearchString] = useState("");
-  //   const movies = route.params.results;
   const size = ImageSizes.w185;
   const navigation = useNavigation();
 
@@ -43,15 +41,15 @@ const Listing = ({ route }) => {
     });
   };
   const renderItem = (movie) => {
-    const imgSource = movie.poster_path
-      ? { uri: imgBaseUrl + size + movie.poster_path }
-      : LocalImages.placeHolder;
+    const imgPath = movie.poster_path
+      ? imgBaseUrl + size + movie.poster_path
+      : null;
     return (
       <TouchableOpacity
         style={styles.resultBox}
         onPress={() => showMovieDetails(movie.id)}
       >
-        <Image source={imgSource} style={styles.thumbnail} />
+        <EasyImage style={styles.thumbnail} webImage={imgPath} />
         <Text style={styles.title}>{movie.title}</Text>
       </TouchableOpacity>
     );
@@ -68,7 +66,7 @@ const Listing = ({ route }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
         <TouchableOpacity style={styles.backButton} onPress={backToHome}>
-          <Image style={styles.backImg} source={LocalImages.back} />
+          <EasyImage style={styles.backImg} localImage={LocalImages.back} />
         </TouchableOpacity>
         <View style={styles.searchBox}>
           <TextInput
@@ -83,6 +81,7 @@ const Listing = ({ route }) => {
         numColumns={2}
         data={movies}
         renderItem={({ item }) => renderItem(item)}
+        keyExtractor={(item) => item.id}
       />
     </SafeAreaView>
   );

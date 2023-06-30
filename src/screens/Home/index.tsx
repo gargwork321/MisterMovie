@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
-  Button,
-  Image,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -20,7 +18,6 @@ import { Strings } from "../../constants/Strings";
 import { debounce } from "lodash";
 import { useNavigation } from "@react-navigation/native";
 import Screens from "../../constants/Screens";
-import LocalImages from "../../constants/LocalImages";
 
 const Home = () => {
   const [movies, setMovies] = useState<any>([]);
@@ -35,16 +32,15 @@ const Home = () => {
   };
   const searchMovieWithText = async (text) => {
     const _ = await searchMovieWith(text).then((data) => {
-      // setMovies(data.results);
       navigation.navigate(Screens.LISTING, {
         results: data.results,
       });
     });
   };
-  const changeCategory = (cat) => {
+  const changeCategory = useCallback((cat) => {
     setSelectedCat(cat.title);
     fetchMovies(cat.id);
-  };
+  }, []);
   const updatedText = (value) => {
     if (value !== "") {
       searchMovieWithText(value);

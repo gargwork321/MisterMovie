@@ -14,17 +14,29 @@ export default function AppNavigation() {
         <Stack.Screen
           name={Screens.HOME}
           component={Home}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+            presentation: "transparentModal",
+            animation: "fade",
+          }}
         />
         <Stack.Screen
           name={Screens.MOVIE_DETAIL}
           component={MovieDetail}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+            presentation: "transparentModal",
+            animation: "fade",
+          }}
         />
         <Stack.Screen
           name={Screens.LISTING}
           component={Listing}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+            presentation: "transparentModal",
+            animation: "fade",
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
