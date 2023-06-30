@@ -1,6 +1,6 @@
 import axios from 'axios';
 const API_KEY = "6bf6963abd98ed229db08c629b195b15";
-export const baseUrl = "https://api.themoviedb.org/3/";//https://api.themoviedb.org/3/search/movie
+export const baseUrl = "https://api.themoviedb.org/3/";
 export const imgBaseUrl = "https://image.tmdb.org/t/p/"
 export const API_FIELD = `api_key=${API_KEY}`
 

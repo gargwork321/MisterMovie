@@ -5,6 +5,7 @@ import Home from "../screens/Home";
 import Screens from "../constants/Screens";
 import MovieDetail from "../screens/MovieDetail";
 import Listing from "../screens/Listing";
+import Searching from "../screens/Searching";
 
 const Stack = createNativeStackNavigator();
 export default function AppNavigation() {
@@ -21,6 +22,14 @@ export default function AppNavigation() {
         <Stack.Screen
           name={Screens.MOVIE_DETAIL}
           component={MovieDetail}
+          options={{
+            headerShown: false,
+            presentation: "transparentModal",
+          }}
+        />
+        <Stack.Screen
+          name={Screens.SEARCHING}
+          component={Searching}
           options={{
             headerShown: false,
           }}

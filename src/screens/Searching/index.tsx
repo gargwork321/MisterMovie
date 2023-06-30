@@ -2,19 +2,23 @@ import {
   FlatList,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { imgBaseUrl } from "../../config/movieApi";
 import LocalImages from "../../constants/LocalImages";
 import { ImageSizes } from "../../constants/Constants";
 import Screens from "../../constants/Screens";
+import { debounce } from "lodash";
+import { searchMovieWith } from "../../network/network";
 import EasyImage from "../../components/EasyImage";
 
-const Listing = ({ navigation, route }) => {
-  const { title, movies } = route.params;
+const Searching = ({ navigation, route }) => {
+  const [movies, setMovies] = useState(route.params.results);
+  const [searchString, setSearchString] = useState("");
   const size = ImageSizes.w185;
 
   //Functions
@@ -23,6 +27,16 @@ const Listing = ({ navigation, route }) => {
   };
   const showMovieDetails = (id) => {
     navigation.navigate(Screens.MOVIE_DETAIL, { movieID: id });
+  };
+  const updatedText = (value) => {
+    setSearchString(value);
+  };
+  const handleTextDebounce = useCallback(debounce(updatedText, 1200), []);
+
+  const searchMovieWithText = async () => {
+    const _ = await searchMovieWith(searchString).then((data) => {
+      setMovies(data.results);
+    });
   };
   const renderItem = (movie) => {
     const imgPath = movie.poster_path
@@ -39,20 +53,33 @@ const Listing = ({ navigation, route }) => {
     );
   };
 
+  //Hooks
+  useEffect(() => {
+    if (searchString !== "") {
+      searchMovieWithText();
+    }
+  }, [searchString]);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
         <TouchableOpacity style={styles.backButton} onPress={backToHome}>
           <EasyImage style={styles.backImg} localImage={LocalImages.back} />
         </TouchableOpacity>
-        <Text style={styles.title}>{title}</Text>
+        <View style={styles.searchBox}>
+          <TextInput
+            placeholder="Search"
+            style={styles.searchInput}
+            onChangeText={handleTextDebounce}
+            autoCorrect={false}
+          />
+        </View>
       </View>
       <FlatList
         numColumns={2}
         data={movies}
         renderItem={({ item }) => renderItem(item)}
         keyExtractor={(item) => item.id}
-        showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>
   );
@@ -68,8 +95,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingBottom: 10,
-    justifyContent: "space-between",
-    paddingRight: 20,
   },
   backButton: {
     width: 40,
@@ -86,12 +111,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flex: 1,
     margin: 5,
-  },
-  title: {
-    color: "#fff",
-    fontSize: 24,
-    fontWeight: "600",
-    marginVertical: 15,
   },
   thumbnail: {
     height: 250,
@@ -123,4 +142,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Listing;
+export default Searching;

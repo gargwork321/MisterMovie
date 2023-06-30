@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from "react-native";
 import {
@@ -30,7 +29,7 @@ const Home = ({ navigation }) => {
   };
   const searchMovieWithText = async (text) => {
     const _ = await searchMovieWith(text).then((data) => {
-      navigation.push(Screens.LISTING, {
+      navigation.navigate(Screens.SEARCHING, {
         results: data.results,
       });
     });
@@ -67,19 +66,8 @@ const Home = ({ navigation }) => {
             onChangeText={handleTextDebounce}
             autoCorrect={false}
           />
-          {/* <TouchableOpacity>
-            <Image
-              style={{ width: 30, height: 30 }}
-              source={LocalImages.clear}
-            />
-          </TouchableOpacity> */}
         </View>
-        <View style={styles.categoryContainer}>
-          <Text style={styles.catTitle}>{Strings.home.categories}</Text>
-          <TouchableOpacity style={styles.centerJustfication}>
-            <Text style={styles.seeAllBtn}>{Strings.home.seeAll}</Text>
-          </TouchableOpacity>
-        </View>
+        <Text style={styles.catTitle}>{Strings.home.categories}</Text>
         <Categories onCategorySelection={changeCategory} />
         <BottomDisplay
           title={selectedCat}
@@ -124,23 +112,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 10,
   },
-  categoryContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
   catTitle: {
     color: "#fff",
     fontSize: 24,
     fontWeight: "600",
     marginVertical: 20,
-  },
-  seeAllBtn: {
-    color: "orange",
-    alignSelf: "center",
-    fontSize: 16,
-  },
-  centerJustfication: {
-    justifyContent: "center",
   },
 });
 
